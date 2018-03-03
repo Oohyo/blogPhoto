@@ -66,6 +66,7 @@ def compress(choose, des_dir, src_dir, file_list):
         img = Image.open(src_dir+infile)
         # size_of_file = os.path.getsize(infile)
         w, h = img.size
+        infile = infile.split(".")[0]+'.min.'+infile.split(".")[1]
         img.thumbnail((int(w/scale), int(h/scale)))
         img.save(des_dir + infile)
 def compress_photo():
