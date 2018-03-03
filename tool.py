@@ -1,4 +1,5 @@
-#coding: utf-8
+#!/usr/bin/env Python
+# coding=utf-8
 from PIL import Image
 import os
 import sys
@@ -104,12 +105,15 @@ def handle_photo():
     file_list = list_img_file(src_dir)
     list_info = []
     for i in range(len(file_list)):
-        filename = file_list[i]
+        filename = file_list[i] # unicode( ,'utf-8')
         date_str, info = filename.split("_")
         info, _ = info.split(".")
         date = datetime.strptime(date_str, "%Y-%m-%d")
         year_month = date_str[0:7]
-        filename, _ = file_list[i].split(".") #links多了后缀，索性就改这了  
+        filename, _ = file_list[i].split(".") #links多了后缀，索性就改这了
+        # 编码问题
+        filename = filename.decode('gbk')
+        info = info.decode('gbk')
         if i == 0:  # 处理第一个文件
             new_dict = {"date": year_month, "arr":{'year': date.year,
                                                                    'month': date.month,
@@ -134,8 +138,9 @@ def handle_photo():
             list_info[-1]['arr']['type'].append('image')
     list_info.reverse()  # 翻转
     final_dict = {"list": list_info}
+    print(final_dict)
     with open("../Blog/source/photos/ins.json","w") as fp:
-        json.dump(final_dict, fp)
+        json.dump(final_dict, fp) # sort_keys=True, ensure_ascii=False
 
 def cut_photo():
     """裁剪算法
