@@ -112,6 +112,7 @@ def handle_photo():
         year_month = date_str[0:7]
         filename, _ = file_list[i].split(".") #links多了后缀，索性就改这了
         # 编码问题
+        print(filename)
         filename = filename.decode('gbk')
         info = info.decode('gbk')
         if i == 0:  # 处理第一个文件
