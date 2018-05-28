@@ -112,26 +112,26 @@ def handle_photo():
         year_month = date_str[0:7]
         filename, _ = file_list[i].split(".") #links多了后缀，索性就改这了
         # 编码问题
-        print(filename)
-        filename = filename.decode('gbk')
-        info = info.decode('gbk')
+        print (filename)
+        #filename = filename.decode('gbk')
+        #info = info.decode('gbk')
         if i == 0:  # 处理第一个文件
             new_dict = {"date": year_month, "arr":{'year': date.year,
-                                                                   'month': date.month,
-                                                                   'link': [filename],
-                                                                   'text': [info],
-                                                                   'type': ['image']
-                                                                   }
+               'month': date.month,
+               'link': [filename],
+               'text': [info],
+               'type': ['image']
+               }
                                         } 
             list_info.append(new_dict)
         elif year_month != list_info[-1]['date']:  # 不是最后的一个日期，就新建一个dict
             new_dict = {"date": year_month, "arr":{'year': date.year,
-                                                   'month': date.month,
-                                                   'link': [filename],
-                                                   'text': [info],
-                                                   'type': ['image']
-                                                   }
-                        }
+               'month': date.month,
+               'link': [filename],
+               'text': [info],
+               'type': ['image']
+               }
+            }
             list_info.append(new_dict)
         else:  # 同一个日期
             list_info[-1]['arr']['link'].append(filename)
